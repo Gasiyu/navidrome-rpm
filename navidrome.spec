@@ -51,8 +51,6 @@ install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 %files
 %license LICENSE
-%dir %{buildroot}%{_sharedstatedir}/%{name}
-%config(noreplace) %{buildroot}%{_sharedstatedir}/%{name}/navidrome.toml
 %{_bindir}/%{name}
 %{_unitdir}/%{name}.service
 %{_sysusersdir}/%{name}.conf
