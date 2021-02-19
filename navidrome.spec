@@ -14,7 +14,7 @@ BuildRequires:  golang >= 1.15
 BuildRequires:  nodejs >= 14.0
 BuildRequires:  npm
 BuildRequires:  taglib-devel
-BuildRequires:  make
+BuildRequires:  make, gcc, gcc-c++
 BuildRequires:  systemd-units
 BuildRequires:  systemd-rpm-macros
 
