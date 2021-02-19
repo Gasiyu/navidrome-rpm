@@ -1,0 +1,2 @@
+#Type Name       ID  GECOS                     Home directory       Shell
+u     navidrome  -   "Navidrome Music Server"  /var/lib/navidrome   /sbin/nologin
