@@ -12,6 +12,7 @@ Source2:        navidrome.sysusers
 BuildRequires:  git
 BuildRequires:  golang >= 1.15
 BuildRequires:  nodejs >= 14.0
+BuildRequires:  npm
 BuildRequires:  taglib-devel
 BuildRequires:  make
 BuildRequires:  systemd-units
