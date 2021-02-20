@@ -9,6 +9,8 @@ Source0:        https://github.com/%{name}/%{name}/archive/v%{version}/%{name}-v
 Source1:        navidrome.service
 Source2:        navidrome.sysusers
 
+Patch1:         0001-Remove-Version-Check.patch
+
 BuildRequires:  git
 BuildRequires:  golang >= 1.15
 BuildRequires:  nodejs >= 14.0
@@ -30,7 +32,9 @@ or mobile device.
 %global debug_package %{nil}
 
 %prep
-%setup
+%setup -q
+
+%patch1
 
 %build
 export NODE_OPTIONS="--max-old-space-size=8192"
