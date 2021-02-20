@@ -39,9 +39,9 @@ make buildall
 
 %install
 install -d %{buildroot}%{_bindir}
-install -d %{buildroot}%{_sharedstatedir}/%{name}
 install -d %{buildroot}%{_unitdir}
 
+mkdir -p %{buildroot}%{_sharedstatedir}/%{name}
 install -p -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
 install -p -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
@@ -51,6 +51,7 @@ install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 %files
 %license LICENSE
+%dir %{buildroot}%{_sharedstatedir}/%{name}
 %{_bindir}/%{name}
 %{_unitdir}/%{name}.service
 %{_sysusersdir}/%{name}.conf
