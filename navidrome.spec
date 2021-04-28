@@ -1,5 +1,5 @@
 Name:           navidrome
-Version:        0.40.0
+Version:        0.42.0
 Release:        1%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
