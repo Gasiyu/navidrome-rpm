@@ -58,5 +58,6 @@ install -p -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/%{name}/%{name}.toml
 %{_bindir}/%{name}
 %{_unitdir}/%{name}.service
 %{_sysusersdir}/%{name}.conf
+%config(noreplace) %{_sysconfdir}/%{name}/%{name}.toml
 
 %changelog
