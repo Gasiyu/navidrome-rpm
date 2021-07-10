@@ -43,6 +43,9 @@ make buildall
 install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_unitdir}
 install -d %{buildroot}%{_sysconfdir}/%{name}
+install -d -o navidrome -g navidrome %{buildroot}%{_sharedstatedir}/%{name}
+install -d -o navidrome -g navidrome %{buildroot}%{_sharedstatedir}/%{name}/data
+install -d -o navidrome -g navidrome %{buildroot}%{_sharedstatedir}/%{name}/music
 
 mkdir -p %{buildroot}%{_sharedstatedir}/%{name}
 install -p -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
