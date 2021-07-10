@@ -1,0 +1,4 @@
+LogLevel = 'info'
+ScanSchedule = '@every 1h'
+MusicFolder = "/var/lib/navidrome/music"
+DataFolder = "/var/lib/navidrome/data"
