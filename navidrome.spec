@@ -43,9 +43,9 @@ make buildall
 install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_unitdir}
 install -d %{buildroot}%{_sysconfdir}/%{name}
-install -d -o navidrome -g navidrome %{buildroot}%{_sharedstatedir}/%{name}
-install -d -o navidrome -g navidrome %{buildroot}%{_sharedstatedir}/%{name}/data
-install -d -o navidrome -g navidrome %{buildroot}%{_sharedstatedir}/%{name}/music
+install -d %{buildroot}%{_sharedstatedir}/%{name}
+install -d %{buildroot}%{_sharedstatedir}/%{name}/data
+install -d %{buildroot}%{_sharedstatedir}/%{name}/music
 
 mkdir -p %{buildroot}%{_sharedstatedir}/%{name}
 install -p -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
@@ -55,6 +55,7 @@ install -p -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/%{name}/%{name}.toml
 
 %pre
 %sysusers_create_compat %{SOURCE2}
+chown -R navidrome:navidrome %{_sharedstatedir}/%{name}
 
 %files
 %license LICENSE
