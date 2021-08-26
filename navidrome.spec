@@ -1,5 +1,5 @@
 Name:           navidrome
-Version:        0.45.0
+Version:        0.45.1
 Release:        1%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
@@ -55,7 +55,9 @@ install -p -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/%{name}/%{name}.toml
 
 %pre
 %sysusers_create_compat %{SOURCE2}
-chown -R navidrome:navidrome %{_sharedstatedir}/%{name}
+chown navidrome:navidrome %{_sharedstatedir}/%{name}
+chown navidrome:navidrome %{_sharedstatedir}/%{name}/data
+chown navidrome:navidrome %{_sharedstatedir}/%{name}/music
 
 %files
 %license LICENSE
