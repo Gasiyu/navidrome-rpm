@@ -35,7 +35,7 @@ or mobile device.
 %setup -q
 
 %build
-export NODE_OPTIONS="--max-old-space-size=8192"
+export NODE_OPTIONS="--max-old-space-size=8192 --openssl-legacy-provider"
 make setup
 make buildall
 
