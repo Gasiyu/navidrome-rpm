@@ -10,9 +10,8 @@ Source1:        navidrome.service
 Source2:        navidrome.sysusers
 Source3:        navidrome.toml
 
-%if 0%{?fedora} >= 36
+# https://github.com/navidrome/navidrome/pull/1767
 Patch0:         0002-Add-Support-for-OpenSSL3.patch
-%endif
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.16
