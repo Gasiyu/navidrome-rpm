@@ -1,6 +1,6 @@
 Name:           navidrome
 Version:        0.47.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
 License:        GPLv3
@@ -9,6 +9,10 @@ Source0:        https://github.com/%{name}/%{name}/archive/v%{version}/%{name}-v
 Source1:        navidrome.service
 Source2:        navidrome.sysusers
 Source3:        navidrome.toml
+
+%if 0%{?fedora} >= 36
+Patch0:         0002-Add-Support-for-OpenSSL3.patch
+%endif
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.16
