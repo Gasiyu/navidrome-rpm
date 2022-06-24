@@ -12,6 +12,7 @@ Source3:        navidrome.toml
 
 # https://github.com/navidrome/navidrome/pull/1767
 Patch0:         0002-Add-Support-for-OpenSSL3.patch
+Patch1:         0003-Set-GOPROXY.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.16
