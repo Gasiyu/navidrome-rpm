@@ -11,8 +11,7 @@ Source2:        navidrome.sysusers
 Source3:        navidrome.toml
 
 # https://github.com/navidrome/navidrome/pull/1767
-Patch0:         0002-Add-Support-for-OpenSSL3.patch
-Patch1:         0003-Set-GOPROXY.patch
+Patch0:         0002-Fix-Build-on-F36.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.16
@@ -38,7 +37,6 @@ or mobile device.
 %prep
 %setup -q
 %patch0
-%patch1
 
 
 %build
