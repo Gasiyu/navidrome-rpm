@@ -38,7 +38,9 @@ or mobile device.
 %prep
 %setup -q
 %patch0 -p1
+%if 0%{?fedora} >= 36
 %patch1 -p1
+%endif
 
 
 %build
