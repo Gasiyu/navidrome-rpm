@@ -36,7 +36,7 @@ or mobile device.
 
 %prep
 %setup -q
-%patch0
+%patch0 -p1
 
 
 %build
