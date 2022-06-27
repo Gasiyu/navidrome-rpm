@@ -37,6 +37,9 @@ or mobile device.
 
 %prep
 %setup -q
+%patch0
+%patch1
+
 
 %build
 export NODE_OPTIONS="--max-old-space-size=8192"
