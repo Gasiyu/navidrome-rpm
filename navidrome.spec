@@ -12,6 +12,7 @@ Source3:        navidrome.toml
 
 # https://github.com/navidrome/navidrome/pull/1767
 Patch0:         0002-Fix-Build-on-F36.patch
+Patch1:         0003-Verbose-Build-Info.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.16
@@ -37,6 +38,7 @@ or mobile device.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 
 %build
