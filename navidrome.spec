@@ -22,6 +22,7 @@ BuildRequires:  taglib-devel, zlib-devel, zlib
 BuildRequires:  make, gcc, gcc-c++
 BuildRequires:  systemd-units
 BuildRequires:  systemd-rpm-macros
+%{?sysusers_requires_compat}
 
 Requires: systemd-units
 Requires: zlib
@@ -48,11 +49,11 @@ make buildall
 install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_unitdir}
 install -d %{buildroot}%{_sysconfdir}/%{name}
-install -d %{buildroot}%{_sharedstatedir}/%{name}
-install -d %{buildroot}%{_sharedstatedir}/%{name}/data
-install -d %{buildroot}%{_sharedstatedir}/%{name}/music
 
+mkdir -p %{buildroot}%{_sharedstatedir}/%{name}/data
+mkdir -p %{buildroot}%{_sharedstatedir}/%{name}/music
 mkdir -p %{buildroot}%{_sharedstatedir}/%{name}
+
 install -p -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
 install -p -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
@@ -60,9 +61,6 @@ install -p -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/%{name}/%{name}.toml
 
 %pre
 %sysusers_create_compat %{SOURCE2}
-chown navidrome:navidrome %{_sharedstatedir}/%{name}
-chown navidrome:navidrome %{_sharedstatedir}/%{name}/data
-chown navidrome:navidrome %{_sharedstatedir}/%{name}/music
 
 %files
 %license LICENSE
@@ -71,7 +69,5 @@ chown navidrome:navidrome %{_sharedstatedir}/%{name}/music
 %{_sysusersdir}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.toml
 %dir %{_sharedstatedir}/%{name}
-%dir %{_sharedstatedir}/%{name}/data
-%dir %{_sharedstatedir}/%{name}/music
 
 %changelog
