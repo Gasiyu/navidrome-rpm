@@ -1,6 +1,6 @@
 Name:           navidrome
 Version:        0.49.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
 License:        GPLv3
@@ -70,5 +70,8 @@ chown navidrome:navidrome %{_sharedstatedir}/%{name}/music
 %{_unitdir}/%{name}.service
 %{_sysusersdir}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.toml
+%dir %{_sharedstatedir}/%{name}
+%dir %{_sharedstatedir}/%{name}/data
+%dir %{_sharedstatedir}/%{name}/music
 
 %changelog
