@@ -1,6 +1,6 @@
 Name:           navidrome
-Version:        0.49.3
-Release:        3%{?dist}
+Version:        0.50.0
+Release:        1%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
 License:        GPLv3
@@ -10,9 +10,7 @@ Source1:        navidrome.service
 Source2:        navidrome.sysusers
 Source3:        navidrome.toml
 
-# https://github.com/navidrome/navidrome/pull/1767
-#Patch0:         0002-Fix-Build-on-F36.patch
-Patch0:         0003-Verbose-Build-Info.patch
+Patch0:         0004-Moddify-for-Packaging.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.18
@@ -42,8 +40,8 @@ or mobile device.
 
 %build
 export NODE_OPTIONS="--max-old-space-size=8192"
-make setup
-make buildall
+make setup GIT_TAG="%{version}-%{release}"
+make buildall GIT_TAG="%{version}-%{release}"
 
 %install
 install -d %{buildroot}%{_bindir}
