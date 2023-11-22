@@ -1,3 +1,16 @@
+diff --git a/Makefile b/Makefile
+index a01f155a..bb30085d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -81,7 +81,7 @@ setup-git: ##@Development Setup Git hooks (pre-commit and pre-push)
+ buildall: buildjs build ##@Build Build the project, both frontend and backend
+ .PHONY: buildall
+ 
+-build: warning-noui-build check_go_env  ##@Build Build only backend
++build: ## warning-noui-build check_go_env  ##@Build Build only backend
+ 	go build -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)" -tags=netgo
+ .PHONY: build
+ 
 diff --git a/ui/src/dialogs/AboutDialog.js b/ui/src/dialogs/AboutDialog.js
 index 046e2eb7..ac0f44bf 100644
 --- a/ui/src/dialogs/AboutDialog.js
