@@ -1,0 +1,13 @@
+diff --git a/ui/src/dialogs/AboutDialog.js b/ui/src/dialogs/AboutDialog.js
+index 046e2eb7..ac0f44bf 100644
+--- a/ui/src/dialogs/AboutDialog.js
++++ b/ui/src/dialogs/AboutDialog.js
+@@ -38,7 +38,7 @@ const LinkToVersion = ({ version }) => {
+     ? `https://github.com/navidrome/navidrome/compare/v${
+         parts[0].split('-')[0]
+       }...${commitID}`
+-    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0]}`
++    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0].split('-')[0]}`
+   return (
+     <TableCell align="left">
+       <Link href={url} target="_blank" rel="noopener noreferrer">

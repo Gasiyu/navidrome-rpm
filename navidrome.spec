@@ -1,5 +1,5 @@
 Name:           navidrome
-Version:        0.50.0
+Version:        0.50.1
 Release:        1%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
@@ -11,6 +11,7 @@ Source2:        navidrome.sysusers
 Source3:        navidrome.toml
 
 Patch0:         0004-Moddify-for-Packaging.patch
+Patch1:         0005-Fix-About-Dialog-Link.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.18
@@ -37,6 +38,7 @@ or mobile device.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 export NODE_OPTIONS="--max-old-space-size=8192"
