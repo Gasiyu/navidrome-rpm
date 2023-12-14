@@ -1,6 +1,6 @@
 Name:           navidrome
-Version:        0.50.1
-Release:        2%{?dist}
+Version:        0.50.2
+Release:        1%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
 License:        GPLv3
