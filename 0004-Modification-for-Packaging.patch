@@ -1,0 +1,37 @@
+diff --git a/Makefile b/Makefile
+index 09f46c55..e4e9542c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -11,7 +11,7 @@ endif
+ 
+ CI_RELEASER_VERSION=1.21.5-1 ## https://github.com/navidrome/ci-goreleaser
+ 
+-setup: check_env download-deps setup-git ##@1_Run_First Install dependencies and prepare development environment
++setup: ## check_env download-deps setup-git ##@1_Run_First Install dependencies and prepare development environment
+ 	@echo Downloading Node dependencies...
+ 	@(cd ./ui && npm ci)
+ .PHONY: setup
+@@ -81,8 +81,8 @@ setup-git: ##@Development Setup Git hooks (pre-commit and pre-push)
+ buildall: buildjs build ##@Build Build the project, both frontend and backend
+ .PHONY: buildall
+ 
+-build: warning-noui-build check_go_env  ##@Build Build only backend
+-	go build -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)-SNAPSHOT" -tags=netgo
++build: ## warning-noui-build check_go_env  ##@Build Build only backend
++	go build -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)" -tags=netgo
+ .PHONY: build
+ 
+ debug-build: warning-noui-build check_go_env  ##@Build Build only backend (with remote debug on)
+diff --git a/ui/src/dialogs/AboutDialog.js b/ui/src/dialogs/AboutDialog.js
+index 046e2eb7..ac0f44bf 100644
+--- a/ui/src/dialogs/AboutDialog.js
++++ b/ui/src/dialogs/AboutDialog.js
+@@ -38,7 +38,7 @@ const LinkToVersion = ({ version }) => {
+     ? `https://github.com/navidrome/navidrome/compare/v${
+         parts[0].split('-')[0]
+       }...${commitID}`
+-    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0]}`
++    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0].split('-')[0]}`
+   return (
+     <TableCell align="left">
+       <Link href={url} target="_blank" rel="noopener noreferrer">
