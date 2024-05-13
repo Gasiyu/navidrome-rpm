@@ -11,6 +11,7 @@ Source2:        navidrome.sysusers
 Source3:        navidrome.toml
 
 Patch0:         0004-Modification-for-Packaging.patch
+Patch1:         0005-Remove-Node-Version-Check.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.18
@@ -37,6 +38,9 @@ or mobile device.
 %prep
 %setup -q
 %patch -P 0 -p1
+%if 0%{?fedora} <= 38
+%patch -P 1 -p1
+%endif
 
 %build
 export NODE_OPTIONS="--max-old-space-size=8192"

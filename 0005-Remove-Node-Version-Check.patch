@@ -1,0 +1,16 @@
+diff --git a/Makefile b/Makefile
+index 9734f9c6..e3a25058 100644
+--- a/Makefile
++++ b/Makefile
+@@ -165,11 +165,6 @@ check_go_env:
+ 
+ check_node_env:
+ 	@(hash node) || (echo "\nERROR: Node environment not setup properly!\n"; exit 1)
+-	@current_node_version=`node --version` && \
+-		echo "$(NODE_VERSION) $$current_node_version" | \
+-		tr ' ' '\n' | sort -V | tail -1 | \
+-		grep -q "^$${current_node_version}$$" || \
+-		(echo "\nERROR: Please check your Node version. Should be at least $(NODE_VERSION)\n"; exit 1)
+ .PHONY: check_node_env
+ 
+ pre-push: lintall testall
