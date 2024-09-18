@@ -1,27 +1,36 @@
 diff --git a/Makefile b/Makefile
-index 1edeb303..9734f9c6 100644
+index 28d34d42..2ce33457 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -11,7 +11,7 @@ endif
+@@ -13,7 +13,7 @@ CI_RELEASER_VERSION ?= 1.23.0-1 ## https://github.com/navidrome/ci-goreleaser
  
- CI_RELEASER_VERSION=1.22.3-1 ## https://github.com/navidrome/ci-goreleaser
+ UI_SRC_FILES := $(shell find ui -type f -not -path "ui/build/*" -not -path "ui/node_modules/*")
  
 -setup: check_env download-deps setup-git ##@1_Run_First Install dependencies and prepare development environment
-+setup: ## check_env download-deps setup-git ##@1_Run_First Install dependencies and prepare development environment
++setup: ##@1_Run_First Install dependencies and prepare development environment
  	@echo Downloading Node dependencies...
  	@(cd ./ui && npm ci)
  .PHONY: setup
-@@ -81,8 +81,8 @@ setup-git: ##@Development Setup Git hooks (pre-commit and pre-push)
- buildall: buildjs build ##@Build Build the project, both frontend and backend
- .PHONY: buildall
+@@ -80,8 +80,8 @@ setup-git: ##@Development Setup Git hooks (pre-commit and pre-push)
+ 	@(cd .git/hooks && ln -sf ../../git/* .)
+ .PHONY: setup-git
  
--build: warning-noui-build check_go_env  ##@Build Build only backend
+-build: check_go_env buildjs ##@Build Build the project
 -	go build -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)-SNAPSHOT" -tags=netgo
-+build: ## warning-noui-build check_go_env  ##@Build Build only backend
++build: buildjs ##@Build Build the project
 +	go build -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)" -tags=netgo
  .PHONY: build
  
- debug-build: warning-noui-build check_go_env  ##@Build Build only backend (with remote debug on)
+ buildall: deprecated build
+@@ -91,7 +91,7 @@ debug-build: check_go_env buildjs ##@Build Build the project (with remote debug
+ 	go build -gcflags="all=-N -l" -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)-SNAPSHOT" -tags=netgo
+ .PHONY: debug-build
+ 
+-buildjs: check_node_env ui/build/index.html ##@Build Build only frontend
++buildjs: ui/build/index.html ##@Build Build only frontend
+ .PHONY: buildjs
+ 
+ ui/build/index.html: $(UI_SRC_FILES)
 diff --git a/ui/src/dialogs/AboutDialog.js b/ui/src/dialogs/AboutDialog.js
 index 046e2eb7..ac0f44bf 100644
 --- a/ui/src/dialogs/AboutDialog.js
