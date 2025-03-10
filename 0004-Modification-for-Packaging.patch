@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index 12e2039b..9b773fcd 100644
+index c6ff60c9..46e65306 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -19,7 +19,7 @@ CROSS_TAGLIB_VERSION ?= 2.0.2-1
@@ -11,7 +11,7 @@ index 12e2039b..9b773fcd 100644
  	@echo Downloading Node dependencies...
  	@(cd ./ui && npm ci)
  .PHONY: setup
-@@ -86,7 +86,7 @@ setup-git: ##@Development Setup Git hooks (pre-commit and pre-push)
+@@ -90,7 +90,7 @@ setup-git: ##@Development Setup Git hooks (pre-commit and pre-push)
  	@(cd .git/hooks && ln -sf ../../git/* .)
  .PHONY: setup-git
  
@@ -20,7 +20,7 @@ index 12e2039b..9b773fcd 100644
  	go build -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)" -tags=netgo
  .PHONY: build
  
-@@ -97,7 +97,7 @@ debug-build: check_go_env buildjs ##@Build Build the project (with remote debug
+@@ -101,7 +101,7 @@ debug-build: check_go_env buildjs ##@Build Build the project (with remote debug
  	go build -gcflags="all=-N -l" -ldflags="-X github.com/navidrome/navidrome/consts.gitSha=$(GIT_SHA) -X github.com/navidrome/navidrome/consts.gitTag=$(GIT_TAG)" -tags=netgo
  .PHONY: debug-build
  
@@ -30,15 +30,15 @@ index 12e2039b..9b773fcd 100644
  
  docker-buildjs: ##@Build Build only frontend using Docker
 diff --git a/ui/src/dialogs/AboutDialog.jsx b/ui/src/dialogs/AboutDialog.jsx
-index ca9db79d..c277f97a 100644
+index facc056e..6b421ed3 100644
 --- a/ui/src/dialogs/AboutDialog.jsx
 +++ b/ui/src/dialogs/AboutDialog.jsx
-@@ -39,7 +39,7 @@ const LinkToVersion = ({ version }) => {
+@@ -41,7 +41,7 @@ const LinkToVersion = ({ version }) => {
      ? `https://github.com/navidrome/navidrome/compare/v${
          parts[0].split('-')[0]
        }...${commitID}`
 -    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0]}`
 +    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0].split('-')[0]}`
    return (
-     <TableCell align="left">
+     <>
        <Link href={url} target="_blank" rel="noopener noreferrer">
