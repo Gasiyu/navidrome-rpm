@@ -11,12 +11,13 @@ Source2:        navidrome.sysusers
 Source3:        navidrome.toml
 
 Patch0:         0004-Modification-for-Packaging.patch
+Patch1:         0006-Specify-Taglib2-Dependency.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.21
 BuildRequires:  nodejs20
 BuildRequires:  nodejs-npm
-BuildRequires:  taglib-devel, zlib-devel, zlib
+BuildRequires:  taglib2-devel, zlib-devel, zlib
 BuildRequires:  make, gcc, gcc-c++
 BuildRequires:  systemd-units
 BuildRequires:  systemd-rpm-macros
@@ -25,6 +26,7 @@ BuildRequires:  systemd-rpm-macros
 Requires: systemd-units
 Requires: zlib
 Requires: ffmpeg
+Requires: taglib2
 
 %description
 
@@ -37,6 +39,7 @@ or mobile device.
 %prep
 %setup -q
 %patch -P 0 -p1
+%patch -P 1 -p1
 
 %build
 export NODE_OPTIONS="--max-old-space-size=8192"
