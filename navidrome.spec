@@ -1,5 +1,5 @@
 Name:           navidrome
-Version:        0.55.1
+Version:        0.55.2
 Release:        1%{?dist}
 Summary:        Modern Music Server and Streamer compatible with Subsonic/Airsonic 
 
@@ -35,17 +35,6 @@ It gives you freedom to listen to your music collection from any browser
 or mobile device.
 
 %global debug_package %{nil}
-
-%pretrans
-echo "Notice from navidrom package maintainer:"
-echo
-echo "Navidrome have been migrated to `taglib` version 2.0. Since Fedora's `taglib` "
-echo "pacakge remains on version 1.31.1 for now and have not decided when and how "
-echo "to migrate(Bugzilla 2335641), a package with name `taglib2` is provided
-echo "within the copr repository. It adds `-2` suffix to library and is provided
-echo "as `libtag-2.so`, which will NOT conflict with current version 1.13's "
-echo "`libtag.so`, as well as other packages build with taglib version 1.13 "
-echo "from Fedora's main repository. "
 
 %prep
 %setup -q
