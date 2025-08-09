@@ -10,8 +10,9 @@ Source1:        navidrome.service
 Source2:        navidrome.sysusers
 Source3:        navidrome.toml
 
-Patch0:         0004-Modification-for-Packaging.patch
-Patch1:         0006-Specify-Taglib2-Dependency.patch
+Patch0:         0001-Fix-Makefile-for-packaging.patch
+Patch1:         0002-Fix-about-version-number-for-packaging.patch
+Patch2:         0003-Update-dependency-to-specify-taglib-2.patch
 
 BuildRequires:  git
 BuildRequires:  golang >= 1.21

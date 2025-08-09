@@ -1,0 +1,25 @@
+From bb067dd011ca01128f718f7acebebdb79dda0dae Mon Sep 17 00:00:00 2001
+From: lch <lchopn@gmail.com>
+Date: Wed, 18 Sep 2024 21:49:45 +0800
+Subject: [PATCH 2/3] Fix about version number for packaging
+
+---
+ ui/src/dialogs/AboutDialog.jsx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ui/src/dialogs/AboutDialog.jsx b/ui/src/dialogs/AboutDialog.jsx
+index 661462b9..d5bcb03f 100644
+--- a/ui/src/dialogs/AboutDialog.jsx
++++ b/ui/src/dialogs/AboutDialog.jsx
+@@ -90,7 +90,7 @@ const LinkToVersion = ({ version }) => {
+     ? `https://github.com/navidrome/navidrome/compare/v${
+         parts[0].split('-')[0]
+       }...${commitID}`
+-    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0]}`
++    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0].split('-')[0]}`
+   return (
+     <>
+       <Link href={url} target="_blank" rel="noopener noreferrer">
+-- 
+2.50.1
+
