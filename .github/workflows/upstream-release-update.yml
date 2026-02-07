@@ -1,0 +1,77 @@
+name: Update spec from upstream release
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: upstream-release-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check latest upstream release and update spec
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
+          REPO: navidrome/navidrome
+          SPEC_FILE: navidrome.spec
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! -f "$SPEC_FILE" ]]; then
+            echo "Spec file not found: $SPEC_FILE" >&2
+            exit 1
+          fi
+
+          current_version=$(awk -F':' '/^Version[[:space:]]*:/ {gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2); print $2; exit}' "$SPEC_FILE")
+          if [[ -z "${current_version:-}" ]]; then
+            echo "Failed to read current version from $SPEC_FILE" >&2
+            exit 1
+          fi
+
+          latest_tag=$(curl -fsSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/releases/latest" \
+            | python3 -c 'import json,sys; print(json.load(sys.stdin)["tag_name"])')
+
+          latest_version=${latest_tag#v}
+
+          echo "Current spec version: $current_version"
+          echo "Latest upstream tag:   $latest_tag"
+          echo "Latest upstream ver:   $latest_version"
+
+          if [[ "$latest_version" == "$current_version" ]]; then
+            echo "No update needed"
+            exit 0
+          fi
+
+          # Update Version and reset Release to 1
+          sed -i -E \
+            -e "s/^(Version:[[:space:]]*)[0-9][^[:space:]]*/\\1${latest_version}/" \
+            -e "s/^(Release:[[:space:]]*)[0-9]+(%\\{\\?dist\\})/\\11\\2/" \
+            "$SPEC_FILE"
+
+          if git diff --exit-code -- "$SPEC_FILE"; then
+            echo "No changes after applying update (unexpected); exiting"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add "$SPEC_FILE"
+          git commit -m "chore(spec): bump to ${latest_version}"
+          git push
